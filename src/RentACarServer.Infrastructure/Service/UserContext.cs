@@ -4,7 +4,7 @@ using System.Security.Claims;
 
 namespace RentACarServer.Infrastructure.Service;
 internal sealed class UserContext(
-    HttpContextAccessor httpContextAccessor) : IUserContext
+    IHttpContextAccessor httpContextAccessor) : IUserContext
 {
     public Guid GetUserId()
     {
