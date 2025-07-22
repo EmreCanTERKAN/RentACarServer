@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentACarServer.Domain", "sr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentACarServer.Application", "src\RentACarServer.Application\RentACarServer.Application.csproj", "{B7ECD585-3A3C-3BD8-AD57-59E5106D5609}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentACarServer.Infrastructure", "src\RentACarServer.Infrastructure\RentACarServer.Infrastructure.csproj", "{59051D9F-47AC-431C-8B9D-4338B7433F63}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{B7ECD585-3A3C-3BD8-AD57-59E5106D5609}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7ECD585-3A3C-3BD8-AD57-59E5106D5609}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7ECD585-3A3C-3BD8-AD57-59E5106D5609}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59051D9F-47AC-431C-8B9D-4338B7433F63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59051D9F-47AC-431C-8B9D-4338B7433F63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59051D9F-47AC-431C-8B9D-4338B7433F63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59051D9F-47AC-431C-8B9D-4338B7433F63}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -30,6 +36,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{860E1E5E-EB00-4DC2-9745-F387A731A810} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{B7ECD585-3A3C-3BD8-AD57-59E5106D5609} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{59051D9F-47AC-431C-8B9D-4338B7433F63} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4727877A-0925-43C3-B223-65B8195A94B4}

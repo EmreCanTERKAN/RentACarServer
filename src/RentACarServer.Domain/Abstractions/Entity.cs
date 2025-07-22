@@ -10,8 +10,8 @@ public abstract class Entity
     public bool IsActive { get; private set; }
     public DateTimeOffset CreatedAt { get; private set; }
     public IdentityId CreatedBy { get; private set; } = default!;
-    public DateTimeOffset? UpdateAt { get; private set; }
-    public IdentityId? UpdateBy { get; private set; }
+    public DateTimeOffset? UpdatedAt { get; private set; }
+    public IdentityId? UpdatedBy { get; private set; }
     public DateTimeOffset? DeletedAt { get; private set; }
     public IdentityId? DeletedBy { get; private set; }
     public bool IsDeleted { get; private set; }
