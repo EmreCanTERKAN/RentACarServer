@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.OData;
 using Microsoft.AspNetCore.RateLimiting;
 using RentACarServer.Application;
 using RentACarServer.Infrastructure;
+using RentACarServer.WebApi;
+using RentACarServer.WebApi.Modules;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -34,6 +36,7 @@ builder.Services
 #endregion
 builder.Services.AddCors();
 builder.Services.AddOpenApi();
+builder.Services.AddExceptionHandler<ExceptionHandler>().AddProblemDetails();
 
 var app = builder.Build();
 
@@ -46,11 +49,13 @@ app.UseCors(cfg => cfg
 .AllowAnyMethod()
 .SetPreflightMaxAge(TimeSpan.FromMinutes(10)));
 
+app.UseExceptionHandler();
+
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers().RequireRateLimiting("fixed");
-
+app.MapAuth();
 //await app.CreateFirstUser();
 
 app.Run();

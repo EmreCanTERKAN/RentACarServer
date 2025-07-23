@@ -17,36 +17,29 @@ public sealed class ValidationBehavior<TRequest, TResponse>
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {
         #region Asenkron hali
-        //// 1. İlgili request için validator yoksa devam et.
-        //if (!_validators.Any())
-        //{
-        //    return await next();
-        //}
+        // if (!_validators.Any())
+        // {
+        //     return await next();
+        // }
 
         //var context = new ValidationContext<TRequest>(request);
 
-        //// 2. Tüm validator'ları asenkron ve paralel olarak çalıştır.
-        //var validationTasks = _validators
-        //    .Select(v => v.ValidateAsync(context, cancellationToken));
+        // var validationTasks = _validators
+        //     .Select(validator => validator.ValidateAsync(context, cancellationToken));
 
-        //var validationResults = await Task.WhenAll(validationTasks);
+        // var validationResults = await Task.WhenAll(validationTasks);
 
-        //// 3. Hataları tek bir listede topla.
-        //var failures = validationResults
-        //    .SelectMany(result => result.Errors)
-        //    .Where(f => f != null)
-        //    .ToList();
+        // var failures = validationResults
+        //     .SelectMany(result => result.Errors)
+        //     .Where(failure => failure is not null) // C# 9.0+ desen eşleştirme ile null kontrolü
+        //     .ToList();
 
-        //// 4. Hata varsa, ValidationException fırlat.
-        //if (failures.Any())
-        //{
-        //    // FluentValidation'ın kendi exception'ını kullanmak,
-        //    // global exception handler'da standart bir hata formatı yakalamayı kolaylaştırır.
-        //    throw new ValidationException(failures);
-        //}
+        // if (failures.Count != 0)
+        // {
+        //     throw new ValidationException(failures);
+        // }
 
-        //// 5. Hata yoksa pipeline'da bir sonraki adıma geç.
-        //return await next();
+        // return await next();
 
         #endregion
 
