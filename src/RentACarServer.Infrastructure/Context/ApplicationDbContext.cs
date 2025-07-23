@@ -33,13 +33,12 @@ internal sealed class ApplicationDbContext : DbContext, IUnitOfWork
         var entries = ChangeTracker.Entries<Entity>();
 
         HttpContextAccessor httpContextAccessor = new();
-        string userIdString =
-            httpContextAccessor
-            .HttpContext!
-            .User
-            .Claims
-            .First(p => p.Type == ClaimTypes.NameIdentifier)
-            .Value;
+        string userIdString = httpContextAccessor
+        .HttpContext!
+        .User
+        .Claims
+        .First(p => p.Type == ClaimTypes.NameIdentifier)
+        .Value;
 
         Guid userId = Guid.Parse(userIdString);
         IdentityId identityId = new(userId);
