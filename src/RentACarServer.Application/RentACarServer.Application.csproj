@@ -15,4 +15,8 @@
     <PackageReference Include="TS.Result" Version="9.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\RentACarServer.Domain\RentACarServer.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
