@@ -9,6 +9,10 @@ internal sealed class UserContext(
     public Guid GetUserId()
     {
         var httpContext = httpContextAccessor.HttpContext;
+        if (httpContext is null)
+        {
+            throw new ArgumentNullException("Context bilgisi bulunamadı");
+        }
         var claims = httpContext.User.Claims;
         string? userId = claims.FirstOrDefault(i => i.Type == ClaimTypes.NameIdentifier)?.Value;
 
