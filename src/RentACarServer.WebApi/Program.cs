@@ -44,6 +44,10 @@ builder.Services
 builder.Services.AddCors();
 builder.Services.AddOpenApi();
 builder.Services.AddExceptionHandler<ExceptionHandler>().AddProblemDetails();
+builder.Services.AddResponseCompression(opt =>
+{
+    opt.EnableForHttps = true;
+});
 
 var app = builder.Build();
 
@@ -55,7 +59,7 @@ app.UseCors(cfg => cfg
 .AllowAnyOrigin()
 .AllowAnyMethod()
 .SetPreflightMaxAge(TimeSpan.FromMinutes(10)));
-
+app.UseResponseCompression();
 
 app.UseAuthentication();
 app.UseAuthorization();
