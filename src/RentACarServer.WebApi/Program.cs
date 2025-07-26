@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.OData;
 using Microsoft.AspNetCore.RateLimiting;
 using RentACarServer.Application;
+using RentACarServer.Application.Service;
 using RentACarServer.Infrastructure;
 using RentACarServer.WebApi;
 using RentACarServer.WebApi.Modules;
@@ -77,7 +78,12 @@ app.UseExceptionHandler();
 app.MapControllers().RequireRateLimiting("fixed").RequireAuthorization();
 app.MapAuth();
 
-app.MapGet("/", () => "selam").RequireAuthorization();
+app.MapGet("/", async (IMailService mailService,CancellationToken cancellationToken) =>
+{
+    await mailService.SendAsync("emrecan@gmail.com", "Test", "<h1><b>Bu bir test mailidir</b></h1>", cancellationToken);
+    return Results.Ok("Mail gönderildi");
+});
+
 //await app.CreateFirstUser();
 
 app.Run();
