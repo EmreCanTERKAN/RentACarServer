@@ -1,6 +1,6 @@
 ﻿namespace RentACarServer.Domain.Users.ValueObjects;
 
-public sealed record ForgotPasswordId(Guid Value);
+public sealed record ForgotPasswordCode(Guid Value);
 
 
 

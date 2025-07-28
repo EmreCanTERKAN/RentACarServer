@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RentACarServer.Infrastructure.Context;
 
@@ -11,9 +12,11 @@ using RentACarServer.Infrastructure.Context;
 namespace RentACarServer.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250728161635_i_changed_nullable_structure_is_forgot_password_completed_field_on_the_user_model")]
+    partial class i_changed_nullable_structure_is_forgot_password_completed_field_on_the_user_model
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -92,13 +95,13 @@ namespace RentACarServer.Infrastructure.Migrations
                                 .HasForeignKey("UserId");
                         });
 
-                    b.OwnsOne("RentACarServer.Domain.Users.ValueObjects.ForgotPasswordCode", "ForgotPasswordCode", b1 =>
+                    b.OwnsOne("RentACarServer.Domain.Users.ValueObjects.ForgotPasswordCreatedAt", "ForgotPasswordCreatedAt", b1 =>
                         {
                             b1.Property<Guid>("UserId")
                                 .HasColumnType("uniqueidentifier");
 
-                            b1.Property<Guid>("Value")
-                                .HasColumnType("uniqueidentifier");
+                            b1.Property<DateTimeOffset>("Value")
+                                .HasColumnType("datetimeoffset");
 
                             b1.HasKey("UserId");
 
@@ -108,13 +111,13 @@ namespace RentACarServer.Infrastructure.Migrations
                                 .HasForeignKey("UserId");
                         });
 
-                    b.OwnsOne("RentACarServer.Domain.Users.ValueObjects.ForgotPasswordCreatedAt", "ForgotPasswordCreatedAt", b1 =>
+                    b.OwnsOne("RentACarServer.Domain.Users.ValueObjects.ForgotPasswordId", "ForgotPasswordId", b1 =>
                         {
                             b1.Property<Guid>("UserId")
                                 .HasColumnType("uniqueidentifier");
 
-                            b1.Property<DateTimeOffset>("Value")
-                                .HasColumnType("datetimeoffset");
+                            b1.Property<Guid>("Value")
+                                .HasColumnType("uniqueidentifier");
 
                             b1.HasKey("UserId");
 
@@ -218,9 +221,9 @@ namespace RentACarServer.Infrastructure.Migrations
                     b.Navigation("FirstName")
                         .IsRequired();
 
-                    b.Navigation("ForgotPasswordCode");
-
                     b.Navigation("ForgotPasswordCreatedAt");
+
+                    b.Navigation("ForgotPasswordId");
 
                     b.Navigation("FullName")
                         .IsRequired();

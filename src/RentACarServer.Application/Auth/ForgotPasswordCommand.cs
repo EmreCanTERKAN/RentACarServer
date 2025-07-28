@@ -299,7 +299,7 @@ internal sealed class ForgotPasswordCommandHandler(
 </html>
 ";
         body = body.Replace("{UserName}", user.FirstName.Value + " " + user.LastName.Value);
-        body = body.Replace("{ResetPasswordUrl}", $"http://localhost:4200/reset-password/{user.ForgotPasswordId!.Value}");
+        body = body.Replace("{ResetPasswordUrl}", $"http://localhost:4200/reset-password/{user.ForgotPasswordCode!.Value}");
         await mailService.SendAsync(to, subject, body, cancellationToken);
 
         return "Şifre sıfırlama maili gönderildi";
