@@ -6,13 +6,13 @@ public sealed class User : Entity
 {
     public User(FirstName firstName, LastName lastName, Email email, UserName userName, Password password)
     {
-        FirstName = firstName;
-        LastName = lastName;
-        Email = email;
-        UserName = userName;
-        Password = password;
-        FullName = new(FirstName.Value + " " + LastName.Value + " (" + Email.Value + ")");
-        IsForgotPasswordCompleted = new(true);
+        SetFirstName(firstName);
+        SetLastName(lastName);
+        SetEmail(email);
+        SetUserName(userName);
+        SetPassword(password);
+        SetFullName();
+        SetForgotPasswordCompleted(new(true));
     }
 
     private User()
@@ -35,7 +35,34 @@ public sealed class User : Entity
         var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
         return computedHash.SequenceEqual(Password.PasswordHash);
     }
-
+    public void SetFirstName(FirstName firstName)
+    {
+        FirstName = firstName;
+    }
+    public void SetLastName(LastName lastName)
+    {
+        LastName = lastName;
+    }
+    public void SetFullName()
+    {
+        FullName = new(FirstName.Value + " " + LastName.Value + " (" + Email.Value + ")");
+    }  
+    public void SetEmail(Email email)
+    {
+        Email = email;
+    }
+    public void SetUserName(UserName userName)
+    {
+        UserName = userName;
+    }
+    public void SetPassword(Password password)
+    {
+        Password = password;
+    }
+    public void SetForgotPasswordCompleted(IsForgotPasswordCompleted isForgotPasswordCompleted)
+    {
+        IsForgotPasswordCompleted = isForgotPasswordCompleted;
+    }
     public void CreateForgotPasswordId()
     {
         ForgotPasswordCode = new(Guid.CreateVersion7());
@@ -43,10 +70,6 @@ public sealed class User : Entity
         IsForgotPasswordCompleted = new(false);
     }
 
-    public void SetPassword(Password password)
-    {
-        Password = password;
-    }
 }
 
 
