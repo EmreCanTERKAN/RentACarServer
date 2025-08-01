@@ -3,5 +3,5 @@
 namespace RentACarServer.Application.Service;
 public interface IJwtProvider
 {
-    string CreateToken(User user);
+    Task<string> CreateTokenAsync(User user,CancellationToken cancellationToken = default);
 }

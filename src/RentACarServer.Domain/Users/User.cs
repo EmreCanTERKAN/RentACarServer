@@ -29,6 +29,7 @@ public sealed class User : Entity
     public ForgotPasswordCreatedAt? ForgotPasswordCreatedAt { get; private set; }
     public IsForgotPasswordCompleted IsForgotPasswordCompleted { get; private set; } = default!;
 
+    #region Behaviors
     public bool VerifyPasswordHash(string password)
     {
         using var hmac = new System.Security.Cryptography.HMACSHA512(Password.PasswordSalt);
@@ -69,6 +70,9 @@ public sealed class User : Entity
         ForgotPasswordCreatedAt = new(DateTimeOffset.Now);
         IsForgotPasswordCompleted = new(false);
     }
+
+
+    #endregion
 
 }
 

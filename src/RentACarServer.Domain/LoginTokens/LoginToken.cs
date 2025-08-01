@@ -1,23 +1,29 @@
 ﻿using RentACarServer.Domain.Abstractions;
+using RentACarServer.Domain.LoginTokens.ValueObjects;
 
 namespace RentACarServer.Domain.LoginTokens;
 public sealed class LoginToken
 {
-    public LoginToken(IsActive isActive, Token token, IdentityId userId, ExpiresDate expiresDate)
+    private LoginToken() { }
+    public LoginToken(
+        Token token,
+        IdentityId userId,
+        ExpiresDate expiresDate)
     {
         Id = new(Guid.CreateVersion7());
-        SetIsActive(isActive);
+        SetIsActive(new(true));
         SetToken(token);
         SetUserId(userId);
         SetExpiresDate(expiresDate);
     }
 
-    public IdentityId Id { get; private set; }
-    public IsActive IsActive { get; private set; } = default!;
+    public IdentityId Id { get; private set; } = default!;
     public Token Token { get; private set; } = default!;
     public IdentityId UserId { get; private set; } = default!;
+    public IsActive IsActive { get; private set; } = default!;
     public ExpiresDate ExpiresDate { get; private set; } = default!;
 
+    #region Behaviors
     public void SetIsActive(IsActive isActive)
     {
         IsActive = isActive;
@@ -38,10 +44,6 @@ public sealed class LoginToken
         ExpiresDate = expiresDate;
     }
 
+    #endregion
 
 }
-
-
-public sealed record IsActive(bool Value);
-public sealed record Token(string Value);
-public sealed record ExpiresDate(DateTimeOffset Value);
