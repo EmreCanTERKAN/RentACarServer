@@ -38,7 +38,7 @@ internal sealed class LoginCommandHandler(
             return Result<string>.Failure("Kullanıcı adı ya da şifre yanlış");
         }
 
-        var token = jwtProvider.CreateTokenAsync(user);
+        var token = await jwtProvider.CreateTokenAsync(user,cancellationToken);
 
         return token;
     }
