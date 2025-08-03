@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.OData;
 using Microsoft.AspNetCore.RateLimiting;
 using RentACarServer.Application;
 using RentACarServer.Application.Service;
 using RentACarServer.Infrastructure;
 using RentACarServer.WebApi;
+using RentACarServer.WebApi.Middlewares;
 using RentACarServer.WebApi.Modules;
 using Scalar.AspNetCore;
 
@@ -68,6 +70,8 @@ builder.Services.AddResponseCompression(opt =>
     opt.EnableForHttps = true;
 });
 
+builder.Services.AddTransient<CheckTokenMiddleware>();
+
 var app = builder.Build();
 
 app.MapOpenApi();
@@ -82,6 +86,8 @@ app.UseResponseCompression();
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseMiddleware<CheckTokenMiddleware>();
+
 app.UseRateLimiter();
 
 
@@ -90,11 +96,7 @@ app.UseExceptionHandler();
 app.MapControllers().RequireRateLimiting("fixed").RequireAuthorization();
 app.MapAuth();
 
-app.MapGet("/", async (IMailService mailService,CancellationToken cancellationToken) =>
-{
-    await mailService.SendAsync("emrecan@gmail.com", "Test", "<h1><b>Bu bir test mailidir</b></h1>", cancellationToken);
-    return Results.Ok("Mail gönderildi");
-});
+app.MapGet("/", () => "Hello word").RequireAuthorization();
 
 //await app.CreateFirstUser();
 
