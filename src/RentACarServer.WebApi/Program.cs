@@ -70,6 +70,7 @@ builder.Services.AddResponseCompression(opt =>
     opt.EnableForHttps = true;
 });
 
+builder.Services.AddHostedService<CheckLoginTokenBackgroudService>();
 builder.Services.AddTransient<CheckTokenMiddleware>();
 
 var app = builder.Build();
