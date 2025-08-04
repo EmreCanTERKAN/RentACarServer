@@ -86,12 +86,11 @@ app.UseResponseCompression();
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseExceptionHandler();
 app.UseMiddleware<CheckTokenMiddleware>();
-
 app.UseRateLimiter();
 
 
-app.UseExceptionHandler();
 
 app.MapControllers().RequireRateLimiting("fixed").RequireAuthorization();
 app.MapAuth();

@@ -20,7 +20,7 @@ public sealed class CheckTokenMiddleware(
 
         if(userId is null)
         {
-            throw new UnauthorizedAccessException();
+            throw new TokenException();
         }
 
         var isTokenAvailable = await loginTokenRepository.AnyAsync(p => 
@@ -30,9 +30,11 @@ public sealed class CheckTokenMiddleware(
 
         if (!isTokenAvailable)
         {
-            throw new UnauthorizedAccessException();
+            throw new TokenException();
         }
 
         await next(context);
     }
 }
+
+public sealed class  TokenException : Exception;
