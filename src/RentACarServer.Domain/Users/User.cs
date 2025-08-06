@@ -93,6 +93,10 @@ public sealed class User : Entity
         TFAIsCompleted = new(false);
     }
 
+    public void SetTFACompleted()
+    {
+        TFAIsCompleted = new(true);
+    }
 
     #endregion
 
