@@ -62,7 +62,7 @@ internal sealed class LoginCommandHandler(
 
             string to = user.Email.Value;
             string subject = "Giriş Onay";
-            string body = @$"Uygulamaya girmek için aşağıdaki kodu kullanabilirsiniz. Bu kod sadece 5 dk geçerlidir. <p><h4>${user.TFAConfirmCode!.Value}</h4></p>";
+            string body = $@"Uygulamaya girmek için aşağıdaki kodu kullanabilirsiniz. Bu kod sadece 5 dk geçerlidir. <p><h4>{user.TFAConfirmCode!.Value}</h4></p>";
             await mailService.SendAsync(to, subject, body, cancellationToken);
 
             var res = new LoginCommandResponse { TFACode = user.TFACode!.Value };

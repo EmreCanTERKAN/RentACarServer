@@ -1,5 +1,4 @@
-﻿
-using GenericRepository;
+﻿using GenericRepository;
 using Microsoft.EntityFrameworkCore;
 using RentACarServer.Domain.LoginTokens;
 

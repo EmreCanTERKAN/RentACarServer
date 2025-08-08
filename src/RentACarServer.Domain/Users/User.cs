@@ -89,6 +89,7 @@ public sealed class User : Entity
         var confirmCode = Guid.CreateVersion7().ToString();
         var expiresDate = DateTimeOffset.Now.AddMinutes(5);
         TFAExpiresDate = new(expiresDate);
+        TFAConfirmCode = new(confirmCode);
         TFACode = new(code);
         TFAIsCompleted = new(false);
     }
