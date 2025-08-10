@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RentACarServer.Domain.Abstractions;
-using RentACarServer.Domain.Branchs;
+using RentACarServer.Domain.Branches;
 using RentACarServer.Domain.LoginTokens;
 using RentACarServer.Domain.Users;
 using System.Security.Claims;

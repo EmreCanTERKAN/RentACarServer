@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using RentACarServer.Domain.Branchs;
+using RentACarServer.Domain.Branches;
 
 namespace RentACarServer.Infrastructure.Configurations;
 

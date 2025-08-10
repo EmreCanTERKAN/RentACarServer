@@ -5,14 +5,16 @@ using RentACarServer.Domain.Branchs.ValueObjects;
 using TS.MediatR;
 using TS.Result;
 
-namespace RentACarServer.Application.Branchs;
-public sealed record BranchCreateCommand(
+namespace RentACarServer.Application.Branches;
+public sealed record BranchUpdateCommand(
+    Guid Id,
     string Name,
-    Address Address) : IRequest<Result<string>>;
+    Address Address,
+    bool IsActive) : IRequest<Result<string>>;
 
-public sealed class BranchCreateCommandValidatior : AbstractValidator<BranchCreateCommand>
+public sealed class BranchUpdateCommandValidatior : AbstractValidator<BranchUpdateCommand>
 {
-    public BranchCreateCommandValidatior()
+    public BranchUpdateCommandValidatior()
     {
         RuleFor(x => x.Name).NotEmpty().WithMessage("Geçerli bir şube adı girin");
         RuleFor(x => x.Address.City).NotEmpty().WithMessage("Geçerli bir şehir seçin");
@@ -22,24 +24,29 @@ public sealed class BranchCreateCommandValidatior : AbstractValidator<BranchCrea
     }
 }
 
-internal sealed class BranchCreateCommandHandler(
+internal sealed class BranchUpdateCommandHandler(
     IBranchRepository branchRepository,
-    IUnitOfWork unitOfWork) : IRequestHandler<BranchCreateCommand, Result<string>>
+    IUnitOfWork unitOfWork) : IRequestHandler<BranchUpdateCommand, Result<string>>
 {
-    public async Task<Result<string>> Handle(BranchCreateCommand request, CancellationToken cancellationToken)
+    public async Task<Result<string>> Handle(BranchUpdateCommand request, CancellationToken cancellationToken)
     {
-        var isNameExist = await branchRepository.AnyAsync(x => x.Name.Value == request.Name, cancellationToken);
+        var branch = await branchRepository.FirstOrDefaultAsync(i => i.Id == request.Id, cancellationToken);
 
-        if (isNameExist)
+        if (branch is null)
         {
-            return Result<string>.Failure("Bu isme ait başka bir kayıt mevcuttur");
+            return Result<string>.Failure("Şube bulunamadı");
         }
 
         Name name = new(request.Name);
         Address address = request.Address;
 
+        branch.SetName(name);
+        branch.SetAddress(address);
+        branch.SetStatus(request.IsActive);
+
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
-        return "Şube başarıyla oluşturuldu";
+        return "Şube başarıyla güncellendi";
+
     }
 }
