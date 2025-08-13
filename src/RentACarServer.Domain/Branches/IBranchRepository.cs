@@ -1,7 +1,6 @@
 ﻿using GenericRepository;
-using RentACarServer.Domain.Branches;
 
-namespace RentACarServer.Domain.Branchs;
+namespace RentACarServer.Domain.Branches;
 public interface IBranchRepository : IRepository<Branch>
 {
 }

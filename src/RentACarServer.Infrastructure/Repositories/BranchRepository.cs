@@ -1,6 +1,5 @@
 ﻿using GenericRepository;
 using RentACarServer.Domain.Branches;
-using RentACarServer.Domain.Branchs;
 using RentACarServer.Infrastructure.Context;
 
 namespace RentACarServer.Infrastructure.Repositories;

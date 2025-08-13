@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 using GenericRepository;
-using RentACarServer.Domain.Branchs;
+using RentACarServer.Domain.Branches;
 using RentACarServer.Domain.Branchs.ValueObjects;
 using TS.MediatR;
 using TS.Result;

@@ -94,9 +94,7 @@ app.UseRateLimiter();
 
 app.MapControllers().RequireRateLimiting("fixed").RequireAuthorization();
 app.MapAuth();
-
-app.MapGet("/", () => "Hello word").RequireAuthorization();
-
+app.MapBranch();
 //await app.CreateFirstUser();
 
 app.Run();

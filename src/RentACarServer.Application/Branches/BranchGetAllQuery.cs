@@ -1,5 +1,5 @@
 ﻿using RentACarServer.Domain.Abstractions;
-using RentACarServer.Domain.Branchs;
+using RentACarServer.Domain.Branches;
 using RentACarServer.Domain.Branchs.ValueObjects;
 using RentACarServer.Domain.Users;
 using TS.MediatR;
@@ -22,10 +22,10 @@ internal sealed class BranchGetAllQueryHandler(
 
         var response = branchRepository
             .GetAll()
-            .Join(userRepository.GetAll(),m => m.CreatedBy, m => m.Id, (b, user) => new {b = b , user = user})
-            .GroupJoin(userRepository.GetAll(), m => m.b.UpdatedBy, m => m.Id, (entity, user) => new {entity = entity , user = user})
+            .Join(userRepository.GetAll(), m => m.CreatedBy, m => m.Id, (b, user) => new { b = b, user = user })
+            .GroupJoin(userRepository.GetAll(), m => m.b.UpdatedBy, m => m.Id, (entity, user) => new { entity = entity, user = user })
             .SelectMany(s => s.user.DefaultIfEmpty(),
-            (x,user) => new
+            (x, user) => new
             {
                 entity = x.entity,
                 updatedUser = user

@@ -15,7 +15,7 @@ internal sealed class ApplicationDbContext : DbContext, IUnitOfWork
     {
     }
 
-    public DbSet<User> Users { get; set; } 
+    public DbSet<User> Users { get; set; }
     public DbSet<LoginToken> LoginTokens { get; set; }
     public DbSet<Branch> Branches { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
