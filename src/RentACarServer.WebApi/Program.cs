@@ -1,8 +1,6 @@
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.OData;
 using Microsoft.AspNetCore.RateLimiting;
 using RentACarServer.Application;
-using RentACarServer.Application.Service;
 using RentACarServer.Infrastructure;
 using RentACarServer.WebApi;
 using RentACarServer.WebApi.Middlewares;
@@ -62,7 +60,10 @@ builder.Services
     );
 #endregion
 builder.Services.AddCors();
-builder.Services.AddOpenApi();
+builder.Services.AddOpenApi("v1", options =>
+{
+    options.AddDocumentTransformer<BearerSecuritySchemeTransformer>();
+});
 builder.Services.AddExceptionHandler<ExceptionHandler>().AddProblemDetails();
 builder.Services.AddResponseCompression(opt =>
 {
