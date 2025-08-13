@@ -40,6 +40,7 @@ internal sealed class BranchCreateCommandHandler(
         Address address = request.Address;
         Branch branch = new(name, address, request.IsActive);
 
+        branchRepository.Add(branch);
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
         return "Şube başarıyla oluşturuldu";
