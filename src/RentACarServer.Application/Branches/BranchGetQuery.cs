@@ -10,14 +10,14 @@ public sealed record BranchGetQuery(
 
 
 internal sealed class BranchQueryHandler(
-    IBranchRepository branchRepository,
-    IUserRepository userRepository) : IRequestHandler<BranchGetQuery, Result<BranchDto>>
+    IBranchRepository branchRepository) : IRequestHandler<BranchGetQuery, Result<BranchDto>>
 {
     public async Task<Result<BranchDto>> Handle(BranchGetQuery request, CancellationToken cancellationToken)
     {
         var branch = await branchRepository
-            .Where(i => i.Id == request.Id)
-            .MapTo(userRepository.GetAll())
+            .GetAllWithAudit()
+            .MapTo()
+            .Where(x => x.Id == request.Id)
             .FirstOrDefaultAsync(cancellationToken);
 
         if (branch is null)
