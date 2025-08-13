@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.RateLimiting;
 using RentACarServer.Application;
 using RentACarServer.Infrastructure;
 using RentACarServer.WebApi;
+using RentACarServer.WebApi.Controllers;
 using RentACarServer.WebApi.Middlewares;
 using RentACarServer.WebApi.Modules;
 using Scalar.AspNetCore;
@@ -57,6 +58,7 @@ builder.Services
        .Expand()
        .OrderBy()
        .SetMaxTop(null)
+       .AddRouteComponents("odata",AppODataController.GetEdmModel())
     );
 #endregion
 builder.Services.AddCors();
