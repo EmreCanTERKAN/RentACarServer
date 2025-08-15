@@ -11,9 +11,9 @@ public sealed record BranchCreateCommand(
     Address Address,
     bool IsActive) : IRequest<Result<string>>;
 
-public sealed class BranchCreateCommandValidatior : AbstractValidator<BranchCreateCommand>
+public sealed class BranchCreateCommandValidator : AbstractValidator<BranchCreateCommand>
 {
-    public BranchCreateCommandValidatior()
+    public BranchCreateCommandValidator()
     {
         RuleFor(x => x.Name).NotEmpty().WithMessage("Geçerli bir şube adı girin");
         RuleFor(x => x.Address.City).NotEmpty().WithMessage("Geçerli bir şehir seçin");
