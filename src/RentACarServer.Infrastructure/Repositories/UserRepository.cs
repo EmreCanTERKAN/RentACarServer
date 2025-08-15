@@ -1,4 +1,5 @@
 ﻿using GenericRepository;
+using RentACarServer.Domain.Role;
 using RentACarServer.Domain.Users;
 using RentACarServer.Infrastructure.Context;
 

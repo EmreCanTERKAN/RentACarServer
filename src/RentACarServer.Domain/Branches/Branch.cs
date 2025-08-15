@@ -1,5 +1,5 @@
 ﻿using RentACarServer.Domain.Abstractions;
-using RentACarServer.Domain.Branchs.ValueObjects;
+using RentACarServer.Domain.Shared;
 
 namespace RentACarServer.Domain.Branches;
 public sealed class Branch : Entity

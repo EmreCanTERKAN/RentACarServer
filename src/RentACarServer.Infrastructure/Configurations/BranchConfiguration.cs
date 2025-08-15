@@ -8,6 +8,7 @@ internal sealed class BranchConfiguration : IEntityTypeConfiguration<Branch>
 {
     public void Configure(EntityTypeBuilder<Branch> builder)
     {
+        builder.ToTable("Branches");
         builder.HasKey(i => i.Id);
         builder.OwnsOne(i => i.Name);
         builder.OwnsOne(i => i.Address);

@@ -1,4 +1,4 @@
-﻿namespace RentACarServer.Domain.Branchs.ValueObjects;
+﻿namespace RentACarServer.Domain.Shared;
 
 public sealed record Address (
     string City,
