@@ -8,9 +8,12 @@ public sealed class Role : Entity
     {
         
     }
-    public Role(Name name)
+    public Role(
+        Name name,
+        bool IsActive)
     {
         SetName(name);
+        SetStatus(IsActive);
     }
     public Name Name { get; private set; } = default!;
     #region Behaviors
