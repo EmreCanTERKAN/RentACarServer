@@ -10,7 +10,7 @@ public static class RoleModule
     public static void MapRole(this IEndpointRouteBuilder builder)
     {
         var app = builder
-            .MapGroup("/role")
+            .MapGroup("/roles")
             .RequireRateLimiting("fixed")
             .RequireAuthorization()
             .WithTags("Roles");

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.OData.Routing.Controllers;
 using Microsoft.OData.Edm;
 using Microsoft.OData.ModelBuilder;
 using RentACarServer.Application.Branches;
+using RentACarServer.Application.Roles;
 using TS.MediatR;
 
 namespace RentACarServer.WebApi.Controllers;
@@ -17,11 +18,16 @@ public class AppODataController : ODataController
         ODataConventionModelBuilder builder = new();
         builder.EnableLowerCamelCase();
         builder.EntitySet<BranchDto>("branches");
+        builder.EntitySet<RoleDto>("roles");
         return builder.GetEdmModel();
     }
 
     [HttpGet("branches")]
     public IQueryable<BranchDto> Branches(ISender sender, CancellationToken cancellationToken) =>
         sender.Send(new BranchGetAllQuery(), cancellationToken).Result;
+
+    [HttpGet("roles")]
+    public IQueryable<RoleDto> Roles(ISender sender, CancellationToken cancellationToken) =>
+        sender.Send(new RoleGetAllQuery(), cancellationToken).Result;
 
 }
