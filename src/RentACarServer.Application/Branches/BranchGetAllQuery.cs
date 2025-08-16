@@ -1,5 +1,4 @@
 ﻿using RentACarServer.Domain.Branches;
-using RentACarServer.Domain.Users;
 using TS.MediatR;
 
 namespace RentACarServer.Application.Branches;
