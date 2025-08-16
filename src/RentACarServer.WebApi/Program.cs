@@ -98,6 +98,7 @@ app.UseRateLimiter();
 app.MapControllers().RequireRateLimiting("fixed").RequireAuthorization();
 app.MapAuth();
 app.MapBranch();
+app.MapRole();
 //await app.CreateFirstUser();
 
 app.Run();
