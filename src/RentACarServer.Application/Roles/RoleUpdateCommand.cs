@@ -1,11 +1,14 @@
 ﻿using FluentValidation;
 using GenericRepository;
+using RentACarServer.Application.Behaviors;
 using RentACarServer.Domain.Role;
 using RentACarServer.Domain.Shared;
 using TS.MediatR;
 using TS.Result;
 
 namespace RentACarServer.Application.Roles;
+
+[Permission("role:edit")]
 public sealed record RoleUpdateCommand(
     Guid Id,
     string Name,

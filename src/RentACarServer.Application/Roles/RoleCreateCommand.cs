@@ -1,12 +1,14 @@
 ﻿using FluentValidation;
 using GenericRepository;
-using RentACarServer.Domain.Branches;
+using RentACarServer.Application.Behaviors;
 using RentACarServer.Domain.Role;
 using RentACarServer.Domain.Shared;
 using TS.MediatR;
 using TS.Result;
 
 namespace RentACarServer.Application.Roles;
+
+[Permission("role:create")]
 public sealed record RoleCreateCommand(
     string Name,
     bool IsActive) : IRequest<Result<string>>;
@@ -35,7 +37,7 @@ internal sealed class RoleCreateCommandHandler(
         }
 
         Name name = new(request.Name);
-        Role role = new(name,request.IsActive);
+        Role role = new(name, request.IsActive);
 
         roleRepository.Add(role);
 

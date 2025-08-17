@@ -1,9 +1,12 @@
 ﻿using GenericRepository;
+using RentACarServer.Application.Behaviors;
 using RentACarServer.Domain.Role;
 using TS.MediatR;
 using TS.Result;
 
 namespace RentACarServer.Application.Roles;
+
+[Permission("role:delete")]
 public sealed record RoleDeleteCommand(
     Guid Id) : IRequest<Result<string>>;
 

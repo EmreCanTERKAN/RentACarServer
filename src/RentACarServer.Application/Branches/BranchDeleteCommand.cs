@@ -1,9 +1,12 @@
 ﻿using GenericRepository;
+using RentACarServer.Application.Behaviors;
 using RentACarServer.Domain.Branches;
 using TS.MediatR;
 using TS.Result;
 
 namespace RentACarServer.Application.Branches;
+
+[Permission("branch:delete")]
 public sealed record BranchDeleteCommand(
     Guid Id) : IRequest<Result<string>>;
 
