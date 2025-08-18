@@ -16,6 +16,5 @@ internal sealed class PermissionGetAllQueryHandler(
         var list = permissionService.GetAll();
 
         return Task.FromResult(Result<List<string>>.Succeed(list));
-
     }
 }

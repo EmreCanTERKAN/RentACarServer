@@ -20,7 +20,5 @@ public static class PermissionModule
                 var response = await sender.Send(new PermissionGetAllQuery(), cancellationToken);
                 return response.IsSuccessful ? Results.Ok(response) : Results.InternalServerError(response);
             }).Produces<Result<List<string>>>();
-
-
     }
 }

@@ -43,6 +43,12 @@ public static class RoleModule
                 return response.IsSuccessful ? Results.Ok(response) : Results.InternalServerError(response);
             }).Produces<Result<Role>>();
 
+        app.MapPut("update-permissions",
+            async (RoleUpdatePermissionsCommand request, ISender sender, CancellationToken cancellationToken) =>
+            {
+                var response = await sender.Send(request, cancellationToken);
+                return response.IsSuccessful ? Results.Ok(response) : Results.InternalServerError(response);
+            }).Produces<Result<string>>();
 
     }
 }
