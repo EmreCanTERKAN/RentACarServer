@@ -101,5 +101,5 @@ app.MapBranch();
 app.MapRole();
 app.MapPermission();
 //await app.CreateFirstUser();
-
+await app.CleanRemovedPermissionsFromRoleAsync();
 app.Run();

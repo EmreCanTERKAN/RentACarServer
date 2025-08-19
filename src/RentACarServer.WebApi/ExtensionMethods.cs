@@ -1,4 +1,5 @@
 ﻿using GenericRepository;
+using RentACarServer.Application.Service;
 using RentACarServer.Domain.Users;
 using RentACarServer.Domain.Users.ValueObjects;
 
@@ -25,5 +26,13 @@ public static class ExtensionMethods
             userRepository.Add(user);
             await unitOfWork.SaveChangesAsync();
         }
+    }
+
+    public static async Task CleanRemovedPermissionsFromRoleAsync (this WebApplication app)
+    {
+        using var scoped = app.Services.CreateScope();
+        var srv = scoped.ServiceProvider;
+        var service = srv.GetRequiredService<PermissionCleanerService>();
+        await service.CleanRemovedPermissionsFromRolesAsync();
     }
 }

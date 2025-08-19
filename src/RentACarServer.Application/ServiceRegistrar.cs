@@ -10,6 +10,7 @@ public static class ServiceRegistrar
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
         services.AddSingleton<PermissionService>();
+        services.AddScoped<PermissionCleanerService>();
 
         services.AddMediatR(cfg =>
         {
