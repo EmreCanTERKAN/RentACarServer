@@ -8,6 +8,7 @@ public sealed class BranchDto : EntityDto
 {
     public string Name { get; set; } = default!;
     public Address Address { get; set; } = default!;
+    public Contact Contact { get; set; } = default!;
 }
 
 public static class BranchExtensions
@@ -20,6 +21,7 @@ public static class BranchExtensions
                 Id = s.Entity.Id,
                 Name = s.Entity.Name.Value,
                 Address = s.Entity.Address,
+                Contact = s.Entity.Contact,
                 CreatedAt = s.Entity.CreatedAt,
                 CreatedBy = s.Entity.CreatedBy,
                 IsActive = s.Entity.IsActive,

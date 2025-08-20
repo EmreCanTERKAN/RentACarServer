@@ -13,6 +13,7 @@ public sealed record BranchUpdateCommand(
     Guid Id,
     string Name,
     Address Address,
+    Contact Contact,
     bool IsActive) : IRequest<Result<string>>;
 
 public sealed class BranchUpdateCommandValidatior : AbstractValidator<BranchUpdateCommand>
@@ -23,7 +24,7 @@ public sealed class BranchUpdateCommandValidatior : AbstractValidator<BranchUpda
         RuleFor(x => x.Address.City).NotEmpty().WithMessage("Geçerli bir şehir seçin");
         RuleFor(x => x.Address.District).NotEmpty().WithMessage("Geçerli bir ilçe seçin");
         RuleFor(x => x.Address.FullAddress).NotEmpty().WithMessage("Geçerli bir tam adres girin");
-        RuleFor(x => x.Address.PhoneNumber1).NotEmpty().WithMessage("Geçerli bir telefon numarası girin");
+        RuleFor(x => x.Contact.PhoneNumber1).NotEmpty().WithMessage("Geçerli bir telefon numarası girin");
     }
 }
 
@@ -42,10 +43,14 @@ internal sealed class BranchUpdateCommandHandler(
 
         Name name = new(request.Name);
         Address address = request.Address;
+        Contact contact = request.Contact;
 
         branch.SetName(name);
         branch.SetAddress(address);
+        branch.SetContact(contact);
         branch.SetStatus(request.IsActive);
+
+        branchRepository.Update(branch);
 
         await unitOfWork.SaveChangesAsync(cancellationToken);
 

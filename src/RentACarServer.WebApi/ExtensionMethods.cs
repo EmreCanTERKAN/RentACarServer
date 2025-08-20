@@ -28,7 +28,7 @@ public static class ExtensionMethods
         }
     }
 
-    public static async Task CleanRemovedPermissionsFromRoleAsync (this WebApplication app)
+    public static async Task CleanRemovedPermissionsFromRoleAsync(this WebApplication app)
     {
         using var scoped = app.Services.CreateScope();
         var srv = scoped.ServiceProvider;

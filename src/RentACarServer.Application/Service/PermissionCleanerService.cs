@@ -11,7 +11,7 @@ public sealed class PermissionCleanerService(
     public async Task CleanRemovedPermissionsFromRolesAsync(CancellationToken cancellationToken = default)
     {
         var currentPermissions = permissionService.GetAll();
-     
+
         var roles = await roleRepository.GetAllWithTracking().ToListAsync(cancellationToken);
 
         foreach (var role in roles)

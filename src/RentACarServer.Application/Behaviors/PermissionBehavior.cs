@@ -17,7 +17,7 @@ public sealed class PermissionBehavior<TRequest, TResponse>(
 
         //var user = await userRepository.FirstOrDefaultAsync(p => p.Id == userId, cancellationToken);
         //if (user is null)
-        //{
+        //{ 
         //    throw new ArgumentException("User bulunamadı");
         //}
 
