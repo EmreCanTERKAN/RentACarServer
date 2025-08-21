@@ -22,7 +22,7 @@ internal sealed class ApplicationDbContext : DbContext, IUnitOfWork
     {
         configurationBuilder.Properties<IdentityId>().HaveConversion<IdentityIdValueConverter>();
         configurationBuilder.Properties<decimal>().HaveColumnType("decimal(18,2)");
-        configurationBuilder.Properties<string>().HaveColumnType("varchar(MAX)");
+        configurationBuilder.Properties<string>().HaveColumnType("nvarchar(MAX)");
         base.ConfigureConventions(configurationBuilder);
     }
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
@@ -31,15 +31,16 @@ internal sealed class ApplicationDbContext : DbContext, IUnitOfWork
 
         HttpContextAccessor httpContextAccessor = new();
         string? userIdString = httpContextAccessor
-        .HttpContext?
-        .User
-        .Claims
-        .FirstOrDefault(p => p.Type == ClaimTypes.NameIdentifier)?
-        .Value;
+                .HttpContext?
+                .User
+                .Claims
+                .FirstOrDefault(p => p.Type == ClaimTypes.NameIdentifier)?
+                .Value;
         if (userIdString is null)
         {
             return base.SaveChangesAsync(cancellationToken);
         }
+
         Guid userId = Guid.Parse(userIdString);
         IdentityId identityId = new(userId);
 
