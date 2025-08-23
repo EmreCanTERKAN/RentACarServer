@@ -1,5 +1,6 @@
 ﻿using GenericRepository;
 using RentACarServer.Application.Service;
+using RentACarServer.Domain.Abstractions;
 using RentACarServer.Domain.Branches;
 using RentACarServer.Domain.Role;
 using RentACarServer.Domain.Shared;
@@ -14,44 +15,54 @@ public static class ExtensionMethods
     {
         using var scoped = app.Services.CreateScope();
         var srv = scoped.ServiceProvider;
-
         var userRepository = srv.GetRequiredService<IUserRepository>();
         var roleRepository = srv.GetRequiredService<IRoleRepository>();
         var branchRepository = srv.GetRequiredService<IBranchRepository>();
-
         var unitOfWork = srv.GetRequiredService<IUnitOfWork>();
 
-        Branch? branch = await branchRepository.FirstOrDefaultAsync(x => x.Name.Value == "Merkez Şube");
+        Branch? branch = await branchRepository.FirstOrDefaultAsync(i => i.Name.Value == "Merkez Şube");
+        Role? role = await roleRepository.FirstOrDefaultAsync(i => i.Name.Value == "sys_admin");
 
-        Role? role = await roleRepository.FirstOrDefaultAsync(x => x.Name.Value == "system_admin");
-
-        if(branch is null)
+        if (branch is null)
         {
             Name name = new("Merkez Şube");
-            Address address = new("Ankara", "ALTINDAĞ", "Talatpaşa bulvarı 151/6");
-            Contact contact = new("03124468263", "03124468264", "info@rentAcar");
-            branch = new Branch(name, address, contact,true);
-
+            Address address = new(
+                "Ankara",
+                "Altındağ",
+                "Cebeci 4yol");
+            Contact contact = new(
+                "3124368263",
+                "3124368264",
+                "info@rentcar.com");
+            branch = new(name, address, contact, true);
             branchRepository.Add(branch);
         }
 
-        if(role is null)
+        if (role is null)
         {
-            Name roleName = new("system_admin");
-            role = new Role(roleName, true);
-
+            Name name = new("sys_admin");
+            role = new(name, true);
             roleRepository.Add(role);
         }
-        
-        if (!(await userRepository.AnyAsync(x => x.UserName.Value == "admin")))
+
+        if (!(await userRepository.AnyAsync(p => p.UserName.Value == "admin")))
         {
             FirstName firstName = new("Emre");
             LastName lastName = new("TERKAN");
-            Email email = new("emrecan@hotmail.comm");
+            Email email = new("emrecanterkan@gmail.com");
             UserName userName = new("admin");
             Password password = new("1");
+            IdentityId branchId = branch.Id;
+            IdentityId roleId = role.Id;
 
-            var user = new User(firstName, lastName, email, userName, password,role.Id,branch.Id);
+            var user = new User(
+                firstName,
+                lastName,
+                email,
+                userName,
+                password,
+                branchId,
+                roleId);
 
             userRepository.Add(user);
             await unitOfWork.SaveChangesAsync();

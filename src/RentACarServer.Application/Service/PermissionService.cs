@@ -6,7 +6,8 @@ public sealed class PermissionService
 {
     public List<string> GetAll()
     {
-        var permission = new HashSet<string>();
+        var permissions = new HashSet<string>();
+        permissions.Add("dashboard:view");
 
         var assembly = Assembly.GetExecutingAssembly();
 
@@ -14,14 +15,14 @@ public sealed class PermissionService
 
         foreach (var type in types)
         {
-            var permissionAttr = type.GetCustomAttribute<PermissionAttribute>();
+            var permissinAttr = type.GetCustomAttribute<PermissionAttribute>();
 
-            if (permissionAttr is not null && !string.IsNullOrEmpty(permissionAttr.Permission))
+            if (permissinAttr is not null && !string.IsNullOrEmpty(permissinAttr.Permission))
             {
-                permission.Add(permissionAttr.Permission);
+                permissions.Add(permissinAttr.Permission);
             }
         }
 
-        return permission.ToList();
+        return permissions.ToList();
     }
 }

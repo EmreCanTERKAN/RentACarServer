@@ -3,27 +3,40 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using RentACarServer.Application.Service;
+using RentACarServer.Domain.Branches;
 using RentACarServer.Domain.LoginTokens;
 using RentACarServer.Domain.LoginTokens.ValueObjects;
+using RentACarServer.Domain.Role;
 using RentACarServer.Domain.Users;
 using RentACarServer.Infrastructure.Options;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Text.Json;
 
 namespace RentACarServer.Infrastructure.Service;
 internal sealed class JwtProvider(
     ILoginTokenRepository loginTokenRepository,
+    IBranchRepository branchRepository,
+    IRoleRepository roleRepository,
     IUnitOfWork unitOfWork,
     IOptions<JwtOptions> options) : IJwtProvider
 {
-    public async Task<string> CreateTokenAsync(User user,CancellationToken cancellationToken)
+    public async Task<string> CreateTokenAsync(User user, CancellationToken cancellationToken)
     {
+        var role = await roleRepository.FirstOrDefaultAsync(p => p.Id == user.RoleId, cancellationToken);
+        var branch = await branchRepository.FirstOrDefaultAsync(p => p.Id == user.BranchId, cancellationToken);
+
         List<Claim> claims = new()
         {
             new Claim(ClaimTypes.NameIdentifier, user.Id),
-            new Claim("fullName", user.FullName.Value),
-            new Claim("email", user.Email.Value)
+            new Claim("fullName", user.FirstName.Value + " " + user.LastName.Value),
+            new Claim("fullNameWithEmail",user.FullName.Value),
+            new Claim("email", user.Email.Value),
+            new Claim("role", role?.Name.Value ?? string.Empty),
+            new Claim("permission", role is null ? "" : JsonSerializer.Serialize(role.Permissions.Select(s => s.Value).ToArray())),
+            new Claim("branch",branch?.Name.Value ?? string.Empty),
+            new Claim("branchId",branch?.Id ?? string.Empty)
         };
 
         SymmetricSecurityKey securityKey = new(Encoding.UTF8.GetBytes(options.Value.SecretKey));
@@ -36,7 +49,7 @@ internal sealed class JwtProvider(
             audience: options.Value.Audience,
             claims: claims,
             notBefore: DateTime.Now,
-            expires : expires,
+            expires: expires,
             signingCredentials: signingCredentials);
 
         JwtSecurityTokenHandler tokenHandler = new();

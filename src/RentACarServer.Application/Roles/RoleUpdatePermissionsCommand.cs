@@ -1,9 +1,12 @@
 ﻿using GenericRepository;
+using RentACarServer.Application.Behaviors;
 using RentACarServer.Domain.Role;
 using TS.MediatR;
 using TS.Result;
 
 namespace RentACarServer.Application.Roles;
+
+[Permission("role:update_permissions")]
 public sealed record RoleUpdatePermissionsCommand(
     Guid RoleId,
     List<string> Permissions) : IRequest<Result<string>>;

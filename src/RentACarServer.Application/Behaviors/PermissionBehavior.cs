@@ -4,7 +4,7 @@ using TS.MediatR;
 
 namespace RentACarServer.Application.Behaviors;
 public sealed class PermissionBehavior<TRequest, TResponse>(
-    IUserContext userContext) : IPipelineBehavior<TRequest, TResponse>
+    IClaimContext claimContext) : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IRequest<TResponse>
 {
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken = default)
@@ -13,7 +13,7 @@ public sealed class PermissionBehavior<TRequest, TResponse>(
 
         if (attr is null) return await next();
 
-        var userId = userContext.GetUserId();
+        var userId = claimContext.GetUserId();
 
         //var user = await userRepository.FirstOrDefaultAsync(p => p.Id == userId, cancellationToken);
         //if (user is null)

@@ -7,7 +7,7 @@ public sealed class User : Entity
     public User(
         FirstName firstName,
         LastName lastName,
-        Email email, 
+        Email email,
         UserName userName,
         Password password,
         IdentityId branchId,
@@ -27,7 +27,7 @@ public sealed class User : Entity
 
     private User()
     {
-        
+
     }
     public FirstName FirstName { get; private set; } = default!;
     public LastName LastName { get; private set; } = default!;
@@ -65,7 +65,7 @@ public sealed class User : Entity
     public void SetFullName()
     {
         FullName = new(FirstName.Value + " " + LastName.Value + " (" + Email.Value + ")");
-    }  
+    }
     public void SetEmail(Email email)
     {
         Email = email;
@@ -89,7 +89,7 @@ public sealed class User : Entity
         IsForgotPasswordCompleted = new(false);
     }
 
-    public void SetTFAStatus (TFAStatus tfaStatus)
+    public void SetTFAStatus(TFAStatus tfaStatus)
     {
         TFAStatus = tfaStatus;
     }

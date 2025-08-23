@@ -1,5 +1,6 @@
 ﻿namespace RentACarServer.Application.Service;
-public interface IUserContext
+public interface IClaimContext
 {
     Guid GetUserId();
+    Guid GetBranchId();
 }
