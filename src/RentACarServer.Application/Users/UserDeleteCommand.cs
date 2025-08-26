@@ -21,6 +21,7 @@ internal sealed class UserDeleteCommandHandler(
         }
 
         user.Delete();
+        userRepository.Update(user);
         await unitOfWork.SaveChangesAsync(cancellationToken);
         return "Kullanıcı başarıyla silindi";
     }
