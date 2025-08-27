@@ -45,7 +45,5 @@ public static class UserExtensions
                 UpdatedFullName = s.UpdatedUser != null ? s.UpdatedUser.FullName.Value : null,
             });
         return response;
-
-
     }
 }
