@@ -32,7 +32,7 @@ public static class RoleModule
         app.MapDelete("{id}",
             async (Guid Id, ISender sender, CancellationToken cancellationToken) =>
             {
-                var response = await sender.Send(new RoleDeleteCommand(Id), cancellationToken);
+                var response = await sender.Send(new RoleDeleteCommand(Id), cancellationToken).ConfigureAwait(false);
                 return response.IsSuccessful ? Results.Ok(response) : Results.InternalServerError(response);
             }).Produces<Result<string>>();
 
@@ -49,6 +49,5 @@ public static class RoleModule
                 var response = await sender.Send(request, cancellationToken);
                 return response.IsSuccessful ? Results.Ok(response) : Results.InternalServerError(response);
             }).Produces<Result<string>>();
-
     }
 }

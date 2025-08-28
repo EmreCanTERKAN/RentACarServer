@@ -5,6 +5,7 @@ using Microsoft.OData.Edm;
 using Microsoft.OData.ModelBuilder;
 using RentACarServer.Application.Branches;
 using RentACarServer.Application.Roles;
+using RentACarServer.Application.Users;
 using TS.MediatR;
 
 namespace RentACarServer.WebApi.Controllers;
@@ -19,6 +20,7 @@ public class AppODataController : ODataController
         builder.EnableLowerCamelCase();
         builder.EntitySet<BranchDto>("branches");
         builder.EntitySet<RoleDto>("roles");
+        builder.EntitySet<UserDto>("users");
         return builder.GetEdmModel();
     }
 
@@ -26,8 +28,20 @@ public class AppODataController : ODataController
     public IQueryable<BranchDto> Branches(ISender sender, CancellationToken cancellationToken) =>
         sender.Send(new BranchGetAllQuery(), cancellationToken).Result;
 
+
     [HttpGet("roles")]
-    public IQueryable<RoleDto> Roles(ISender sender, CancellationToken cancellationToken) =>
-        sender.Send(new RoleGetAllQuery(), cancellationToken).Result;
+    public async Task<IQueryable<RoleDto>> Roles(ISender sender, CancellationToken cancellationToken)
+    {
+        var response =  await sender.Send(new RoleGetAllQuery(), cancellationToken);
+        return response;
+    }
+
+
+    [HttpGet("users")]
+    public async Task<IQueryable<UserDto>> Users(ISender sender, CancellationToken cancellationToken)
+    {
+        var response = await sender.Send(new UserGetAllQuery(), cancellationToken);
+        return response;
+    }
 
 }
