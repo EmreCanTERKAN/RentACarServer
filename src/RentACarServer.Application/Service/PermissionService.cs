@@ -4,25 +4,31 @@ using System.Reflection;
 namespace RentACarServer.Application.Service;
 public sealed class PermissionService
 {
-    public List<string> GetAll()
-    {
-        var permissions = new HashSet<string>();
-        permissions.Add("dashboard:view");
+    // İzinleri sadece bir kez okunacak ve burada saklanacak.
+    private readonly IReadOnlyList<string> _permissions;
 
+    public PermissionService()
+    {
+        // Bu kod uygulama başlarken SADECE BİR KEZ çalışacak.
+        var permissions = new HashSet<string> { "dashboard:view" };
         var assembly = Assembly.GetExecutingAssembly();
 
-        var types = assembly.GetTypes();
+        var permissionsFromAttributes = assembly.GetTypes()
+            .Select(t => t.GetCustomAttribute<PermissionAttribute>())
+            .Where(attr => attr is not null && !string.IsNullOrEmpty(attr.Permission))
+            .Select(attr => attr!.Permission);
 
-        foreach (var type in types)
+        foreach (var permission in permissionsFromAttributes)
         {
-            var permissinAttr = type.GetCustomAttribute<PermissionAttribute>();
-
-            if (permissinAttr is not null && !string.IsNullOrEmpty(permissinAttr.Permission))
-            {
-                permissions.Add(permissinAttr.Permission);
-            }
+            permissions.Add(permission!);
         }
 
-        return permissions.ToList();
+        _permissions = permissions.ToList().AsReadOnly();
+    }
+
+    // Bu metot artık anında cevap döner, çünkü hesaplama çoktan yapıldı.
+    public IReadOnlyList<string> GetAll()
+    {
+        return _permissions;
     }
 }
