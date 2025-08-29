@@ -34,7 +34,7 @@ internal sealed class JwtProvider(
             new Claim("fullNameWithEmail",user.FullName.Value),
             new Claim("email", user.Email.Value),
             new Claim("role", role?.Name.Value ?? string.Empty),
-            new Claim("permission", role is null ? "" : JsonSerializer.Serialize(role.Permissions.Select(s => s.Value).ToArray())),
+            new Claim("permissions", role is null ? "" : JsonSerializer.Serialize(role.Permissions.Select(s => s.Value).ToArray())),
             new Claim("branch",branch?.Name.Value ?? string.Empty),
             new Claim("branchId",branch?.Id ?? string.Empty)
         };

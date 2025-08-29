@@ -11,7 +11,8 @@ public sealed class User : Entity
         UserName userName,
         Password password,
         IdentityId branchId,
-        IdentityId roleId)
+        IdentityId roleId,
+        bool isActive)
     {
         SetFirstName(firstName);
         SetLastName(lastName);
@@ -23,6 +24,7 @@ public sealed class User : Entity
         SetTFAStatus(new(false));
         SetBranchId(branchId);
         SetRoleId(roleId);
+        SetStatus(isActive);
     }
 
     private User()

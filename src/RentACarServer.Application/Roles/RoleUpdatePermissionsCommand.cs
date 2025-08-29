@@ -30,7 +30,7 @@ internal sealed class RoleUpdatePermissionsCommandHandler(
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
 
-        return "rol izinleri güncellendi";
+        return "Rol izinleri güncellendi";
 
     }
 }

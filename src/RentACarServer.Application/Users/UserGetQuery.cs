@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using RentACarServer.Application.Behaviors;
 using RentACarServer.Domain.Branches;
 using RentACarServer.Domain.Role;
 using RentACarServer.Domain.Users;
@@ -6,6 +7,7 @@ using TS.MediatR;
 using TS.Result;
 
 namespace RentACarServer.Application.Users;
+[Permission("user:view")]
 public sealed record UserGetQuery(Guid Id) : IRequest<Result<UserDto>>;
 
 internal sealed class UserGetQueryHandler(
