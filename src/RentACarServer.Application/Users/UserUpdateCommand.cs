@@ -73,6 +73,7 @@ internal sealed class UserUpdateCommandHandler(
         }
         user.SetFirstName(new FirstName(request.FirstName));
         user.SetLastName(new LastName(request.LastName));
+        user.SetFullName();
         user.SetEmail(new Email(request.Email));
         user.SetUserName(new UserName(request.UserName));
         user.SetBranchId(new IdentityId(branchId));
