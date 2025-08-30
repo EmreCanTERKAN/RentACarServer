@@ -1,7 +1,7 @@
 ﻿using RentACarServer.Domain.Abstractions;
 using RentACarServer.Domain.Shared;
 
-namespace RentACarServer.Domain.Role;
+namespace RentACarServer.Domain.Roles;
 public sealed class Role : Entity, IAggregate
 {
     private readonly List<Permission> _permissions = new();

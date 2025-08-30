@@ -6,7 +6,7 @@ using RentACarServer.Application.Service;
 using RentACarServer.Domain.Branches;
 using RentACarServer.Domain.LoginTokens;
 using RentACarServer.Domain.LoginTokens.ValueObjects;
-using RentACarServer.Domain.Role;
+using RentACarServer.Domain.Roles;
 using RentACarServer.Domain.Users;
 using RentACarServer.Infrastructure.Options;
 using System.IdentityModel.Tokens.Jwt;

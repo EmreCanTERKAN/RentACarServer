@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RentACarServer.Application.Behaviors;
 using RentACarServer.Domain.Branches;
-using RentACarServer.Domain.Role;
+using RentACarServer.Domain.Roles;
 using RentACarServer.Domain.Users;
 using TS.MediatR;
 using TS.Result;

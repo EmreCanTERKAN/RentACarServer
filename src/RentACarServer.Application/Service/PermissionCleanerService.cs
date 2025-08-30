@@ -1,6 +1,6 @@
 ﻿using GenericRepository;
 using Microsoft.EntityFrameworkCore;
-using RentACarServer.Domain.Role;
+using RentACarServer.Domain.Roles;
 
 namespace RentACarServer.Application.Service;
 public sealed class PermissionCleanerService(

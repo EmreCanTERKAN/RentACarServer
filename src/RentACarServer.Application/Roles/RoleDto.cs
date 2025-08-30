@@ -1,5 +1,5 @@
 ﻿using RentACarServer.Domain.Abstractions;
-using RentACarServer.Domain.Role;
+using RentACarServer.Domain.Roles;
 
 namespace RentACarServer.Application.Roles;
 public sealed class RoleDto : EntityDto

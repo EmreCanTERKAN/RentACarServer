@@ -1,4 +1,4 @@
-﻿using RentACarServer.Domain.Role;
+﻿using RentACarServer.Domain.Roles;
 using RentACarServer.Infrastructure.Abstractions;
 using RentACarServer.Infrastructure.Context;
 

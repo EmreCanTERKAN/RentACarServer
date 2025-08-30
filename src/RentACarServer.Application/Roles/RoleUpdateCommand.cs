@@ -1,7 +1,8 @@
 ﻿using FluentValidation;
 using GenericRepository;
 using RentACarServer.Application.Behaviors;
-using RentACarServer.Domain.Role;
+using RentACarServer.Domain.Roles;
+
 using RentACarServer.Domain.Shared;
 using TS.MediatR;
 using TS.Result;

@@ -2,7 +2,7 @@
 using RentACarServer.Application.Service;
 using RentACarServer.Domain.Abstractions;
 using RentACarServer.Domain.Branches;
-using RentACarServer.Domain.Role;
+using RentACarServer.Domain.Roles;
 using RentACarServer.Domain.Shared;
 using RentACarServer.Domain.Users;
 using RentACarServer.Domain.Users.ValueObjects;

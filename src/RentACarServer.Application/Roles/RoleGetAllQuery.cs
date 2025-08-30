@@ -1,5 +1,5 @@
 ﻿using RentACarServer.Application.Behaviors;
-using RentACarServer.Domain.Role;
+using RentACarServer.Domain.Roles;
 using TS.MediatR;
 
 namespace RentACarServer.Application.Roles;

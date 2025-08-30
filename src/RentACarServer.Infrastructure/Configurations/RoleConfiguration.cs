@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using RentACarServer.Domain.Role;
+using RentACarServer.Domain.Roles;
 
 namespace RentACarServer.Infrastructure.Configurations;
 
