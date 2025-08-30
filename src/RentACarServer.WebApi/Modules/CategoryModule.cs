@@ -1,22 +1,22 @@
-﻿using RentACarServer.Application.Branches;
-using RentACarServer.Domain.Branches;
+﻿using RentACarServer.Application.Categories;
+using RentACarServer.Domain.Categories;
 using TS.MediatR;
 using TS.Result;
 
 namespace RentACarServer.WebApi.Modules;
 
-public static class BranchModule
+public static class CategoryModule
 {
-    public static void MapBranch(this IEndpointRouteBuilder builder)
+    public static void MapCategory(this IEndpointRouteBuilder builder)
     {
         var app = builder
-            .MapGroup("/branches")
+            .MapGroup("/categories")
             .RequireRateLimiting("fixed")
             .RequireAuthorization()
-            .WithTags("Branches");
+            .WithTags("Categories");
 
         app.MapPost(string.Empty,
-            async (BranchCreateCommand request, ISender sender, CancellationToken cancellationToken) =>
+            async (CategoryCreateCommand request, ISender sender, CancellationToken cancellationToken) =>
             {
                 var res = await sender.Send(request, cancellationToken);
                 return res.IsSuccessful ? Results.Ok(res) : Results.InternalServerError(res);
@@ -24,7 +24,7 @@ public static class BranchModule
             .Produces<Result<string>>();
 
         app.MapPut(string.Empty,
-            async (BranchUpdateCommand request, ISender sender, CancellationToken cancellationToken) =>
+            async (CategoryUpdateCommand request, ISender sender, CancellationToken cancellationToken) =>
             {
                 var res = await sender.Send(request, cancellationToken);
                 return res.IsSuccessful ? Results.Ok(res) : Results.InternalServerError(res);
@@ -34,7 +34,7 @@ public static class BranchModule
         app.MapDelete("{id}",
             async (Guid Id, ISender sender, CancellationToken cancellationToken) =>
             {
-                var res = await sender.Send(new BranchDeleteCommand(Id), cancellationToken);
+                var res = await sender.Send(new CategoryDeleteCommand(Id), cancellationToken);
                 return res.IsSuccessful ? Results.Ok(res) : Results.InternalServerError(res);
             })
             .Produces<Result<string>>();
@@ -42,9 +42,9 @@ public static class BranchModule
         app.MapGet("{id}",
             async (Guid Id, ISender sender, CancellationToken cancellationToken) =>
             {
-                var res = await sender.Send(new BranchGetQuery(Id), cancellationToken);
+                var res = await sender.Send(new CategoryGetQuery(Id), cancellationToken);
                 return res.IsSuccessful ? Results.Ok(res) : Results.InternalServerError(res);
             })
-            .Produces<Result<Branch>>();
+            .Produces<Result<Category>>();
     }
 }

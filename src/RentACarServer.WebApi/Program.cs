@@ -103,6 +103,7 @@ app.MapBranch();
 app.MapRole();
 app.MapUser();
 app.MapPermission();
+app.MapCategory();
 
 
 //await app.CreateFirstUser();
