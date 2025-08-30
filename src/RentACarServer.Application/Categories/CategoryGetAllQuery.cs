@@ -1,7 +1,9 @@
-﻿using RentACarServer.Domain.Categories;
+﻿using RentACarServer.Application.Behaviors;
+using RentACarServer.Domain.Categories;
 using TS.MediatR;
 
 namespace RentACarServer.Application.Categories;
+[Permission("category:view")]
 public sealed record CategoryGetAllQuery : IRequest<IQueryable<CategoryDto>>;
 
 internal sealed class CategoryGetAllQueryHandler(
