@@ -1,0 +1,47 @@
+﻿using RentACarServer.Domain.Abstractions;
+using RentACarServer.Domain.ProtectionPackages.ValueObjects;
+using RentACarServer.Domain.Shared;
+
+namespace RentACarServer.Domain.ProtectionPackages;
+public sealed class ProtectionPackage : Entity
+{
+    private readonly List<ProtectionCoverage> _coverages = new();
+    private ProtectionPackage()
+    {
+        
+    }
+    public ProtectionPackage(
+        Name name, 
+        Price price, 
+        IsRecommended isRecommended)
+    {
+        SetName(name);
+        SetPrice(price);
+        SetIsRecommended(isRecommended);
+    }
+
+    public Name Name { get; private set; } = default!;
+    public Price Price { get; private set; } = default!;
+    public IsRecommended IsRecommended  { get; private set; } = default!;
+    public IReadOnlyCollection<ProtectionCoverage> Coverages => _coverages;
+
+    #region Behaviors
+    public void SetName(Name name)
+    {
+        Name = name;
+    }
+
+    public void SetPrice(Price price)
+    {
+        Price = price;
+    }
+
+    public void SetIsRecommended(IsRecommended isRecommended)
+    {
+        IsRecommended = isRecommended;
+    }
+
+    #endregion
+
+
+}
