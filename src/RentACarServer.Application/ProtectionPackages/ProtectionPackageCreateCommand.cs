@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 using GenericRepository;
-using RentACarServer.Domain.Branches;
+using RentACarServer.Application.Behaviors;
 using RentACarServer.Domain.ProtectionPackages;
 using RentACarServer.Domain.ProtectionPackages.ValueObjects;
 using RentACarServer.Domain.Shared;
@@ -8,6 +8,8 @@ using TS.MediatR;
 using TS.Result;
 
 namespace RentACarServer.Application.ProtectionPackages;
+
+[Permission("protection_package:create")]
 public sealed record ProtectionPackageCreateCommand(
     string Name,
     decimal Price,
@@ -44,7 +46,7 @@ internal sealed class ProtectionPackageCreateCommandHandler(
 
         ProtectionPackage protectionPackage = new(name, price, isRecommended, coverages);
 
-        await protectionPackageRepository.AddAsync(protectionPackage,cancellationToken);
+        await protectionPackageRepository.AddAsync(protectionPackage, cancellationToken);
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
         return "Koruma paketi başarıyla oluşturuldu";
