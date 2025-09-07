@@ -13,11 +13,13 @@ public sealed class ProtectionPackage : Entity
     public ProtectionPackage(
         Name name, 
         Price price, 
-        IsRecommended isRecommended)
+        IsRecommended isRecommended,
+        IEnumerable<ProtectionCoverage> coverages)
     {
         SetName(name);
         SetPrice(price);
         SetIsRecommended(isRecommended);
+        SetCoverages(coverages);
     }
 
     public Name Name { get; private set; } = default!;
@@ -41,7 +43,10 @@ public sealed class ProtectionPackage : Entity
         IsRecommended = isRecommended;
     }
 
+    public void SetCoverages(IEnumerable<ProtectionCoverage> coverages)
+    {
+        _coverages.Clear();
+        _coverages.AddRange(coverages);
+    }
     #endregion
-
-
 }
